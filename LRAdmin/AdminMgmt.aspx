@@ -74,7 +74,7 @@
       </asp:ListView>
     </asp:View>
     <asp:View ID="DetailView" runat="server">
-      <h4>编辑用户</h4>
+      <h4><asp:Literal ID="lbDetail" runat="server">编辑用户</asp:Literal></h4>
       <table class="form-table">
         <tr class="form-field">
           <th scope="row"><asp:Label ID="Label6" runat="server">登录名<span class="desc">(不可修改)</span></asp:Label></th>
@@ -97,6 +97,13 @@
             <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ErrorMessage="此为必填项" ControlToValidate="edtName" Display="Dynamic"></asp:RequiredFieldValidator>
           </td>
         </tr>
+        <tr class="form-field" id="lineAuth" runat="server" visible="false">
+          <th scope="row"><asp:Label ID="Label13" runat="server" AssociatedControlID="edtPass">密码<span class="desc">(必填)</span></asp:Label></th>
+          <td>
+            <asp:TextBox ID="edtPass" runat="server" TextMode="Password" CssClass="textbox"></asp:TextBox>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="此为必填项" ControlToValidate="edtPass" Display="Dynamic"></asp:RequiredFieldValidator>
+          </td>
+        </tr>
         <tr class="form-field" id="linePass" runat="server">
           <th scope="row"><asp:Label ID="Label12" runat="server" AssociatedControlID="edtPass1">修改密码<span class="desc">(留空则不修改)</span></asp:Label></th>
           <td>
@@ -106,6 +113,7 @@
             </p>
             <p class="field-line">
               <asp:TextBox ID="edtPass2" runat="server" TextMode="Password" CssClass="textbox"></asp:TextBox>
+              <asp:CustomValidator ID="CustomValidator1" runat="server" ErrorMessage="此为必填项" ControlToValidate="edtPass2" OnServerValidate="CustomValidator1_Validate" ClientValidationFunction="checkpass" Display="Dynamic" ValidateEmptyText="true"></asp:CustomValidator>
               <asp:CompareValidator ID="CompareValidator2" runat="server" ErrorMessage="密码不匹配" ControlToCompare="edtPass1" ControlToValidate="edtPass2" Display="Dynamic"></asp:CompareValidator>
             </p>
             <p class="indicator-hint"><span class="ui-icon ui-icon-info" style="float:left;margin-right:3px;"></span>提示：登录密码应至少8位字符。为了保证安全性，应包含大小写字母、数字以及符号，例如 ! " ? $ % ^ &。</p>
@@ -159,6 +167,18 @@
               }
             }
           });
+        }
+        function checkpass(source, clientside_arguments) {
+          if ($('#<%=edtPass1.ClientID %>').val() != "") {
+            if (clientside_arguments.Value == "") {
+              clientside_arguments.IsValid = false;
+            }
+            else {
+              clientside_arguments.IsValid = true;
+            }
+          } else {
+            clientside_arguments.IsValid = true;
+          }
         }
       </script>
     </asp:View>

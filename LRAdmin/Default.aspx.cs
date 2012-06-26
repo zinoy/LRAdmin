@@ -61,6 +61,7 @@ namespace LRAdmin
 
                                 Session[Helper.UserKey] = admin.Username;
                                 Session["lr_admin_id"] = admin.ID;
+                                Session["lr_admin_user"] = admin.Username;
                                 Session["lr_admin_name"] = admin.DisplayName;
                                 Session["lr_admin_role"] = admin.RoleID;
 

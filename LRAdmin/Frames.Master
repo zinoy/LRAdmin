@@ -18,7 +18,8 @@
   <div class="frame">
     <div class="top-bar">
       <h2>路虎中国网站管理平台</h2>
-      <p class="user-bar">欢迎，<asp:Literal ID="lbUser" runat="server"></asp:Literal> (<asp:Literal ID="lbRole" runat="server"></asp:Literal>) | <a href="Default.aspx?ac=logout">退出</a></p>
+      <p class="user-bar">欢迎，<asp:Literal ID="lbUser" runat="server"></asp:Literal> (<asp:Literal ID="lbRole" runat="server"></asp:Literal>) |
+        <asp:HyperLink ID="linkProfile" runat="server" NavigateUrl="~/AdminMgmt.aspx?m=profile">个人资料</asp:HyperLink> | <a href="Default.aspx?ac=logout">退出</a></p>
     </div>
     <div class="left-nav">
       <div class="left-frame">

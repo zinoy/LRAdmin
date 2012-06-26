@@ -33,45 +33,19 @@ namespace LRAdmin
                         {
                             linePass.Visible = false;
                         }
-                        using (LandRoverDBDataContext ctx = new LandRoverDBDataContext())
-                        {
-                            var user = (from a in ctx.L_Administrators
-                                        where a.ID == uid
-                                        select a).SingleOrDefault();
-
-                            var role = from r in ctx.L_Roles
-                                       where r.Status == 1
-                                       select new
-                                       {
-                                           ID = r.ID,
-                                           Name = r.RoleName
-                                       };
-                            if (user != null)
-                            {
-                                edtRole.DataSource = role.ToList();
-                                edtRole.DataTextField = "Name";
-                                edtRole.DataValueField = "ID";
-                                edtEmail.Text = user.Email;
-                                edtName.Text = user.DisplayName;
-                                edtRole.SelectedValue = user.RoleID.ToString();
-                                edtUser.Text = user.Username;
-                                edtStatus.Text = ((UserStatus)user.Status).ToString();
-                                if ((UserStatus)user.Status == UserStatus.Banned)
-                                {
-                                    edtBan.Text = "启用帐号";
-                                }
-                                else
-                                {
-                                    edtBan.Text = "禁用帐号";
-                                }
-                            }
-                            else
-                            {
-                                Alert.ShowAlert(Page, "指定的用户不存在。", Alert.AlertState.OpenInThisWindow, "AdminMgmt.aspx");
-                                return;
-                            }
-                        }
+                        ShowDetailByUserID(uid);
                         //jsBlock.Text = "<script type=\"text/javascript\">$($('.content-tab li')[1]).addClass(\"cur\");</script>";
+                        DetailView.DataBind();
+                        CommandView.ActiveViewIndex = 1;
+                        break;
+                    case "profile":
+                        int sid = (int)Session["lr_admin_id"];
+                        lineQuick.Visible = false;
+                        lineAuth.Visible = true;
+                        tabBack.Visible = false;
+                        Label12.Text = "新密码<span class=\"desc\">(留空则不修改)</span>";
+                        lbDetail.Text = "修改个人资料";
+                        ShowDetailByUserID(sid);
                         DetailView.DataBind();
                         CommandView.ActiveViewIndex = 1;
                         break;
@@ -136,6 +110,48 @@ namespace LRAdmin
             }
         }
 
+        private void ShowDetailByUserID(int uid)
+        {
+            using (LandRoverDBDataContext ctx = new LandRoverDBDataContext())
+            {
+                var user = (from a in ctx.L_Administrators
+                            where a.ID == uid
+                            select a).SingleOrDefault();
+
+                var role = from r in ctx.L_Roles
+                           where r.Status == 1
+                           select new
+                           {
+                               ID = r.ID,
+                               Name = r.RoleName
+                           };
+                if (user != null)
+                {
+                    edtRole.DataSource = role.ToList();
+                    edtRole.DataTextField = "Name";
+                    edtRole.DataValueField = "ID";
+                    edtEmail.Text = user.Email;
+                    edtName.Text = user.DisplayName;
+                    edtRole.SelectedValue = user.RoleID.ToString();
+                    edtUser.Text = user.Username;
+                    edtStatus.Text = ((UserStatus)user.Status).ToString();
+                    if ((UserStatus)user.Status == UserStatus.Banned)
+                    {
+                        edtBan.Text = "启用帐号";
+                    }
+                    else
+                    {
+                        edtBan.Text = "禁用帐号";
+                    }
+                }
+                else
+                {
+                    Alert.ShowAlert(Page, "指定的用户不存在。", Alert.AlertState.OpenInThisWindow, "AdminMgmt.aspx");
+                    return;
+                }
+            }
+        }
+
         protected void dataList_ItemDataBound(object sender, ListViewItemEventArgs e)
         {
             Literal id = (Literal)e.Item.FindControl("lbID");
@@ -194,29 +210,56 @@ namespace LRAdmin
 
         protected void edtSubmit_Click(object sender, EventArgs e)
         {
-            int uid;
-            if (!int.TryParse(Request.QueryString["id"], out uid))
+            if (IsValid)
             {
-                Alert.ShowAlert(Page, "参数非法！", Alert.AlertState.OpenInThisWindow, "AdminMgmt.aspx");
-                return;
-            }
-            using (LandRoverDBDataContext ctx = new LandRoverDBDataContext())
-            {
-                var admin = (from u in ctx.L_Administrators
-                             where u.ID == uid
-                             select u).Single();
-
-                admin.DisplayName = edtName.Text.Trim();
-                if ((int)Session["lr_admin_id"] == uid && !string.IsNullOrEmpty(edtPass1.Text))
+                int uid;
+                if (!int.TryParse(Request.QueryString["id"], out uid))
                 {
-                    admin.Password = Helper.GetPasswordString(admin.Username, edtPass1.Text.Trim());
+                    if (Request.QueryString["m"] == "profile")
+                    {
+                        uid = (int)Session["lr_admin_id"];
+                    }
+                    else
+                    {
+                        Alert.ShowAlert(Page, "参数非法！", Alert.AlertState.OpenInThisWindow, "AdminMgmt.aspx");
+                        return;
+                    }
                 }
-                admin.Email = edtEmail.Text.Trim();
-                admin.RoleID = int.Parse(edtRole.SelectedValue);
-                ctx.SubmitChanges();
-            }
+                using (LandRoverDBDataContext ctx = new LandRoverDBDataContext())
+                {
+                    L_Administrators admin;
 
-            Alert.ShowAlert(HttpContext.Current, "修改成功!", Alert.AlertState.OpenInThisWindow, Request.Url.ToString());
+                    if (lineAuth.Visible)
+                    {
+                        string oldpass = Helper.GetPasswordString((string)Session["lr_admin_user"], edtPass.Text.Trim());
+                        admin = (from a in ctx.L_Administrators
+                                 where a.ID == uid && a.Password == oldpass
+                                 select a).SingleOrDefault();
+                        if (admin == null)
+                        {
+                            Alert.ShowAlert(Page, "密码错误，请重试！", Alert.AlertState.Nothing, string.Empty);
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        admin = (from u in ctx.L_Administrators
+                                 where u.ID == uid
+                                 select u).Single();
+                    }
+
+                    admin.DisplayName = edtName.Text.Trim();
+                    if ((int)Session["lr_admin_id"] == uid && !string.IsNullOrEmpty(edtPass1.Text))
+                    {
+                        admin.Password = Helper.GetPasswordString(admin.Username, edtPass1.Text.Trim());
+                    }
+                    admin.Email = edtEmail.Text.Trim();
+                    admin.RoleID = int.Parse(edtRole.SelectedValue);
+                    ctx.SubmitChanges();
+                }
+
+                Alert.ShowAlert(HttpContext.Current, "修改成功!", Alert.AlertState.OpenInThisWindow, Request.Url.ToString());
+            }
         }
 
         protected void edtResetPassword_Click(object sender, EventArgs e)
@@ -249,6 +292,18 @@ namespace LRAdmin
             {
                 Alert.ShowAlert(Page, "参数非法！", Alert.AlertState.OpenInThisWindow, "AdminMgmt.aspx");
                 return;
+            }
+        }
+
+        protected void CustomValidator1_Validate(object sender, ServerValidateEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(edtPass1.Text) && string.IsNullOrEmpty(e.Value))
+            {
+                e.IsValid = false;
+            }
+            else
+            {
+                e.IsValid = true;
             }
         }
     }

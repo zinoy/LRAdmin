@@ -1,0 +1,60 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Frames.master.cs" Inherits="LRAdmin.Frames" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+  <title>路虎中国网站管理平台</title>
+  <link href="css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
+  <link href="css/redmond/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css" />
+  <link href="css/admin.css" rel="stylesheet" type="text/css" />
+  <script src="js/jquery.js" type="text/javascript"></script>
+  <script src="js/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script>
+  <script src="js/jquery.ui.datepicker-zh-CN.js" type="text/javascript"></script>
+  <script src="js/jquery.dataTables.js" type="text/javascript"></script>
+  <script src="js/default.js" type="text/javascript"></script>
+</head>
+<body>
+  <form id="form1" runat="server">
+  <div class="frame">
+    <div class="top-bar">
+      <h2>路虎中国网站管理平台</h2>
+      <p class="user-bar">欢迎，<asp:Literal ID="lbUser" runat="server"></asp:Literal> (<asp:Literal ID="lbRole" runat="server"></asp:Literal>) | <a href="Default.aspx?ac=logout">退出</a></p>
+    </div>
+    <div class="left-nav">
+      <div class="left-frame">
+        <dl>
+          <dt><a href="#expand">管理平台设置</a></dt>
+          <dd><a href="AdminMgmt.aspx">用户管理</a></dd>
+          <dd><a href="RoleMgmt.aspx">角色管理</a></dd>
+          <dd><a href="ModuleMgmt.aspx">模块管理</a></dd>
+          <dd class="end"><a href="Permission.aspx">权限管理</a></dd>
+        </dl>
+        <dl>
+          <dt><a href="#expand">常规数据导出</a></dt>
+          <dd><a href="KeepMeInformed.aspx">保持联系</a></dd>
+          <dd><a href="RequestBrochure.aspx">索取手册</a></dd>
+          <dd class="end"><a href="TestDrive.aspx">试乘试驾</a></dd>
+        </dl>
+        <dl>
+          <dt><a href="#expand">活动数据导出</a></dt>
+          <dd><a href="HelloEvoque.aspx">Hello Evoque</a></dd>
+          <dd><a href="EvoqueEffect.aspx">极光之城</a></dd>
+          <dd class="end"><a href="Discover24Hours.aspx">发现无止境</a></dd>
+        </dl>
+      </div>
+    </div>
+    <div class="main">
+      <div class="content-tab" id="Tabs">
+        <h4><asp:Literal ID="subTitle" runat="server"></asp:Literal></h4>
+        <ul runat="server">
+          <asp:ContentPlaceHolder ID="TabsHolder" runat="server"></asp:ContentPlaceHolder>
+        </ul>
+      </div>
+      <div class="content">
+        <asp:ContentPlaceHolder ID="ContentHolder" runat="server"></asp:ContentPlaceHolder>
+      </div>
+    </div>
+  </div>
+  </form>
+</body>
+</html>

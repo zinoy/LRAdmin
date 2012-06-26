@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LRAdmin", "LRAdmin\LRAdmin.csproj", "{2B64FE9E-383B-4666-9706-2C927168A4B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccessModule", "AccessModule\AccessModule.csproj", "{E43BFCDE-8CD0-438B-A5FA-22CFE0E99E95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataEntity", "DataEntity\DataEntity.csproj", "{14908398-C541-4246-AA97-CE6C59A56730}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2B64FE9E-383B-4666-9706-2C927168A4B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B64FE9E-383B-4666-9706-2C927168A4B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B64FE9E-383B-4666-9706-2C927168A4B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B64FE9E-383B-4666-9706-2C927168A4B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E43BFCDE-8CD0-438B-A5FA-22CFE0E99E95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E43BFCDE-8CD0-438B-A5FA-22CFE0E99E95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E43BFCDE-8CD0-438B-A5FA-22CFE0E99E95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E43BFCDE-8CD0-438B-A5FA-22CFE0E99E95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14908398-C541-4246-AA97-CE6C59A56730}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14908398-C541-4246-AA97-CE6C59A56730}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14908398-C541-4246-AA97-CE6C59A56730}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14908398-C541-4246-AA97-CE6C59A56730}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

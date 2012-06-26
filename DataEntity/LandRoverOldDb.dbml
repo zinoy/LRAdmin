@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="landrover" Class="LandRoverOldDbDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="ConnectionString" ConnectionString="Data Source=(local);Initial Catalog=landrover;Integrated Security=True" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.users" Member="users">
+    <Type Name="users">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="username" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="password" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="age" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="city" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="sex" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="dianhua" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="shouji" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="address" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="youbian" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="sheng" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="enews" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="times" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="receive" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="phone" Type="System.String" DbType="NChar(20)" CanBeNull="true" />
+      <Column Name="carStyle" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+      <Column Name="oftenGo" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.shijia1" Member="shijia1">
+    <Type Name="shijia1">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="sex" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="username" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="date" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="sheng" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="city" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="address" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="youbian" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="dianhua" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="shouji" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="chexing" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="sjsj" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="jxssf" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="jxscs" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="jxs" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="lxfs" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="times" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="gcsj" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="gcys" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="phcx" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="phcx1" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="phcx2" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="phcx3" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="phcx4" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="owner" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="boughtdate" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="carbrand" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="carmodel" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="brochure" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.shouce" Member="shouce">
+    <Type Name="shouce">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="sex" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="username" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="date" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="sheng" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="city" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="address" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="youbian" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="dianhua" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="shouji" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="shouceida" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="shouceidb" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="shouceid1" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="shouceid2" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="shouceid3" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="shouceid4" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="shouceid5" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="contactme" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="times" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="gcsj" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="gcys" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="phcx" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="phcx1" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="phcx2" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="phcx3" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="phcx4" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="phcx5" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="td" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

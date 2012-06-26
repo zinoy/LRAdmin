@@ -1,0 +1,20 @@
+﻿body { -webkit-text-size-adjust: none; margin: 0; }
+ul { list-style: none; margin: 0; padding: 0; }
+h1 { font-family: "微软雅黑"; font-size: 16px; font-weight: normal; margin: 0; padding: 0; }
+
+.hide { display: none; }
+.login-frame { border: solid 1px #e5e5e5; border-radius: 3px; margin: 0 auto; padding: 30px 0; width: 330px; box-shadow: 0 4px 10px -1px rgba(200,200,200,.7); }
+.header { border-bottom: solid 1px #ccc; height: 30px; line-height: 30px; margin-bottom: 10px; padding-left: 10px; }
+.form-error { display: none; }
+
+.from-frame { margin: 0 auto; width: 280px; }
+.form-row { margin-bottom: 15px; }
+.form-label { color: #999; font-size: 12px; display: block; margin-bottom: 1px; margin-left: 3px; }
+.form-text { border: solid 1px #a6c9e2; border-radius: 5px; color: #2e6e9e; font-family: "HelveticaNeue-Light" , "Helvetica Neue Light" , "Helvetica Neue" ,sans-serif; font-size: 24px; line-height: 1; padding: 3px 5px; width: 268px; }
+.form-text-short { width: 126px; }
+.captcha { color: #2e6e9e; float: right; font-size: 12px; line-height: 35px; margin: 16px 0 16px 12px; }
+a.captcha:hover { text-decoration: none; }
+.ui-button-text { font-size: 12px !important; }
+
+.panels { font-size: 12px; margin: 100px auto 0; min-height: 40px; width: 330px; }
+.panels div { margin-bottom: 10px; padding: 0 5px; }

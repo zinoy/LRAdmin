@@ -82,7 +82,7 @@
             <asp:Label ID="edtUser" runat="server" CssClass="label"></asp:Label>
           </td>
         </tr>
-        <tr class="form-field">
+        <tr class="form-field" id="lineEmail" runat="server">
           <th scope="row"><asp:Label ID="Label7" runat="server" AssociatedControlID="edtEmail">电子邮件<span class="desc">(必填)</span></asp:Label></th>
           <td>
             <asp:TextBox ID="edtEmail" runat="server" CssClass="textbox"></asp:TextBox>
@@ -90,7 +90,7 @@
             <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="电子邮件格式非法" ControlToValidate="edtEmail" Display="Dynamic" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
           </td>
         </tr>
-        <tr class="form-field">
+        <tr class="form-field" id="lineName" runat="server">
           <th scope="row"><asp:Label ID="Label8" runat="server" AssociatedControlID="edtName">姓名<span class="desc">(必填)</span></asp:Label></th>
           <td>
             <asp:TextBox ID="edtName" runat="server" CssClass="textbox"></asp:TextBox>
@@ -119,7 +119,7 @@
             <p class="indicator-hint"><span class="ui-icon ui-icon-info" style="float:left;margin-right:3px;"></span>提示：登录密码应至少8位字符。为了保证安全性，应包含大小写字母、数字以及符号，例如 ! " ? $ % ^ &。</p>
           </td>
         </tr>
-        <tr class="form-field">
+        <tr class="form-field" id="lineRole" runat="server">
           <th scope="row"><asp:Label ID="Label10" runat="server" AssociatedControlID="edtRole">角色</asp:Label></th>
           <td>
             <asp:DropDownList ID="edtRole" runat="server" CssClass="dropdown">
@@ -135,22 +135,22 @@
         <tr class="form-field" id="lineQuick" runat="server">
           <th scope="row"><asp:Label ID="Label11" runat="server">快速操作</asp:Label></th>
           <td>
-            <button type="button" class="btn_submit" id="btn_resetpass">重设登录密码</button>
-            <asp:Button ID="edtResetPassword" runat="server" Text="Button" CssClass="" OnClick="edtResetPassword_Click" />
+            <button type="button" class="btn_submit" id="btn_resetpass" runat="server">重设登录密码</button>
             <uc:ModernButton ID="edtBan" runat="server" CssClass="btn_submit" OnClick="toggleUserStatus"></uc:ModernButton>
+            <asp:HiddenField ID="postbackArgs" runat="server" />
           </td>
         </tr>
       </table>
       <p class="submit">
         <uc:ModernButton ID="edtSubmit" runat="server" CssClass="btn_submit" OnClick="edtSubmit_Click">提交</uc:ModernButton>
       </p>
-      <div id="dialog-confirm" title="重设用户的登录密码？" class="hide">
-        <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>系统将生成一个随机的8位密码，继续？</p>
+      <div id="dialog-confirm" title="密码重置" class="hide">
+        <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>系统将生成一个随机的8位密码，是否继续？</p>
       </div>
       <script type="text/javascript">
         $(document).ready(function() {
           $(".btn_submit").button();
-          $('#btn_resetpass').click(startReset);
+          $('#<%=btn_resetpass.ClientID %>').click(startReset);
         });
         function startReset(e) {
           $('#dialog-confirm').dialog({
@@ -159,8 +159,8 @@
             modal: true,
             buttons: {
               "确定": function() {
-                $('#<%=edtResetPassword.ClientID %>').click();
-                //__doPostBack('<%=edtResetPassword.ClientID %>', 'OnClick');
+                $('#<%=postbackArgs.ClientID %>').val("reset");
+                $('form').submit();
               },
               "取消": function() {
                 $(this).dialog("close");

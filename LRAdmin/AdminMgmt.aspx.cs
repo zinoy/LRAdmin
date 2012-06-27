@@ -33,7 +33,15 @@ namespace LRAdmin
                         {
                             linePass.Visible = false;
                         }
-                        ShowDetailByUserID(uid);
+                        UserStatus stat = ShowDetailByUserID(uid);
+                        if (stat == UserStatus.Banned)
+                        {
+                            lineEmail.Visible = false;
+                            lineName.Visible = false;
+                            lineRole.Visible = false;
+                            btn_resetpass.Visible = false;
+                            edtSubmit.Visible = false;
+                        }
                         //jsBlock.Text = "<script type=\"text/javascript\">$($('.content-tab li')[1]).addClass(\"cur\");</script>";
                         DetailView.DataBind();
                         CommandView.ActiveViewIndex = 1;
@@ -86,7 +94,7 @@ namespace LRAdmin
                         {
                             var admin = from a in ctx.L_Administrators
                                         join r in ctx.L_Roles on a.RoleID equals r.ID
-                                        where a.Status == 1
+                                        where a.Status != 3
                                         select new
                                         {
                                             ID = a.ID,
@@ -108,9 +116,21 @@ namespace LRAdmin
                         break;
                 }
             }
+            else
+            {
+                switch (postbackArgs.Value)
+                {
+                    case "reset":
+                        ResetPasswordAction();
+                        break;
+                    default:
+                        return;
+                }
+                postbackArgs.Value = string.Empty;
+            }
         }
 
-        private void ShowDetailByUserID(int uid)
+        private UserStatus ShowDetailByUserID(int uid)
         {
             using (LandRoverDBDataContext ctx = new LandRoverDBDataContext())
             {
@@ -143,11 +163,12 @@ namespace LRAdmin
                     {
                         edtBan.Text = "禁用帐号";
                     }
+                    return (UserStatus)user.Status;
                 }
                 else
                 {
                     Alert.ShowAlert(Page, "指定的用户不存在。", Alert.AlertState.OpenInThisWindow, "AdminMgmt.aspx");
-                    return;
+                    return UserStatus.Deleted;
                 }
             }
         }
@@ -262,7 +283,7 @@ namespace LRAdmin
             }
         }
 
-        protected void edtResetPassword_Click(object sender, EventArgs e)
+        private void ResetPasswordAction()
         {
             int uid;
             if (!int.TryParse(Request.QueryString["id"], out uid))
@@ -293,6 +314,19 @@ namespace LRAdmin
                 Alert.ShowAlert(Page, "参数非法！", Alert.AlertState.OpenInThisWindow, "AdminMgmt.aspx");
                 return;
             }
+            using (LandRoverDBDataContext ctx = new LandRoverDBDataContext())
+            {
+                var user = (from a in ctx.L_Administrators
+                            where a.ID == uid && a.Status != (byte)UserStatus.Deleted
+                            select a).Single();
+
+                if (user.Status == 1)
+                    user.Status = 2;
+                else if (user.Status == 2)
+                    user.Status = 1;
+                ctx.SubmitChanges();
+            }
+            Alert.ShowAlert(Page, "操作成功！", Alert.AlertState.OpenInThisWindow, Request.Url.ToString());
         }
 
         protected void CustomValidator1_Validate(object sender, ServerValidateEventArgs e)

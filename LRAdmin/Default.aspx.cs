@@ -21,6 +21,7 @@ namespace LRAdmin
                     case "logout":
                         Session.Remove(Helper.UserKey);
                         Session.Remove("lr_admin_id");
+                        Session.Remove("lr_admin_user");
                         Session.Remove("lr_admin_name");
                         Session.Remove("lr_admin_role");
                         break;
